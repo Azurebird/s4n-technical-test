@@ -1,4 +1,4 @@
-package com.seven4n.util.file;
+package com.seven4n.util.file.read;
 
 import java.io.IOException;
 import java.util.List;

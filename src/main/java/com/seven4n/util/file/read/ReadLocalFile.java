@@ -1,4 +1,4 @@
-package com.seven4n.util.file;
+package com.seven4n.util.file.read;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

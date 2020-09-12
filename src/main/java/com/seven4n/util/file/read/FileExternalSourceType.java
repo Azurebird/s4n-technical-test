@@ -1,4 +1,4 @@
-package com.seven4n.util.file;
+package com.seven4n.util.file.read;
 
 /**
  * The different types of external source that can be read from
