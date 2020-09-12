@@ -1,8 +1,6 @@
 package com.seven4n.util.file.read;
 
-import com.seven4n.util.file.read.FileExternalSourceType;
-import com.seven4n.util.file.read.ReadExternalFile;
-import com.seven4n.util.file.read.ReadFileFactory;
+import com.seven4n.util.file.FileExternalSourceType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

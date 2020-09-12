@@ -14,5 +14,5 @@ public interface ReadExternalFile {
      * @return A List of Strings representing each line of the file
      * @throws IOException In case the file does not exists
      */
-    List<String> readByLines(final String location) throws IOException;
+    List<String> readByLines(String location) throws IOException;
 }
