@@ -24,9 +24,9 @@ public class ReadFileFactoryTest {
         ReadExternalFile fileReader = ReadFileFactory.getReadExternalFile(FileExternalSourceType.LOCAL_FILE);
         List<String> fileLines = fileReader.readByLines(getResourceFilePath("test_file.txt"));
 
-        assertEquals("AAAAIAA", fileLines.get(0));
-        assertEquals("DDDAIAD", fileLines.get(1));
-        assertEquals("AAIADAD", fileLines.get(2));
+        assertEquals("AAAAIAA N", fileLines.get(0));
+        assertEquals("DDDAIAD S", fileLines.get(1));
+        assertEquals("AAIADAD D", fileLines.get(2));
     }
 
     @Test

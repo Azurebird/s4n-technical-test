@@ -28,7 +28,9 @@ public final class ReadLocalFile implements ReadExternalFile {
         final File file = new File(location);
         final Scanner scanner = new Scanner(file);
         final List<String> lines = new ArrayList<>();
-        scanner.forEachRemaining(lines::add);
+        while(scanner.hasNextLine()) {
+            lines.add(scanner.nextLine());
+        }
         logger.debug("Reading file at {} successful", location);
         return lines;
     }
