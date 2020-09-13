@@ -29,7 +29,7 @@ public class CartesianPosition {
     }
 
     /**
-     *
+     * Makes a turn to the right for this cartesian position returning a new object with the change
      * @return A new CartesianPosition with an orientation change
      */
     public CartesianPosition turnRight() {
@@ -37,7 +37,7 @@ public class CartesianPosition {
     }
 
     /**
-     *
+     * Makes an advance forward, depending on its orientation a different axis will be modified
      * @return A new CartesianPosition with a change in the coordinates
      */
     public CartesianPosition advance() {
