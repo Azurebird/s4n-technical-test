@@ -1,5 +1,8 @@
-package com.seven4n.robot.drone;
+package com.seven4n.robot;
 
+/**
+ * Represents a cardinal orientation with its corresponding axis modifier incrementation
+ */
 public enum CardinalOrientation {
     N(1, 0),
     O(0, -1),
@@ -17,10 +20,11 @@ public enum CardinalOrientation {
         E.right = CardinalOrientation.S;
     }
 
-    CardinalOrientation left;
-    CardinalOrientation right;
-    int yIncrement;
-    int xIncrement;
+    public int yIncrement;
+    public int xIncrement;
+
+    public CardinalOrientation left;
+    public CardinalOrientation right;
 
     CardinalOrientation(int yIncrement, int xIncrement) {
         this.yIncrement = yIncrement;

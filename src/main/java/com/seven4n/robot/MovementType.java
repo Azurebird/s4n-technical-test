@@ -1,4 +1,4 @@
-package com.seven4n.robot.drone;
+package com.seven4n.robot;
 
 /**
  * Describes the possible movements made by an aircraft

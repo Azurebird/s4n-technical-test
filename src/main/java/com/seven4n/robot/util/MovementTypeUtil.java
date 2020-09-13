@@ -1,6 +1,6 @@
-package com.seven4n.util;
+package com.seven4n.robot.util;
 
-import com.seven4n.robot.drone.MovementType;
+import com.seven4n.robot.MovementType;
 
 import java.util.Arrays;
 import java.util.List;

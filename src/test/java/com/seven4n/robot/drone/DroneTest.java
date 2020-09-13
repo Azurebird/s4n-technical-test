@@ -1,6 +1,9 @@
 package com.seven4n.robot.drone;
 
-import com.seven4n.util.MovementTypeUtil;
+import com.seven4n.robot.CartesianPosition;
+import com.seven4n.robot.MovementType;
+import com.seven4n.robot.Robot;
+import com.seven4n.robot.util.MovementTypeUtil;
 import com.seven4n.util.file.FileExternalSourceType;
 import com.seven4n.util.file.read.ReadExternalFile;
 import com.seven4n.util.file.read.ReadFileFactory;
@@ -12,12 +15,14 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@DisplayName("Test cases for read file factory")
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@DisplayName("Test cases for Drone")
 public class DroneTest {
 
     @Test
-    @DisplayName("Should retrieve the file and match its content")
-    public void testGetReadExternalFile() throws IOException, URISyntaxException {
+    @DisplayName("Should execute the delivery routes successfully with tracking report")
+    public void testExecuteDeliveryRoutes() throws IOException, InterruptedException {
         ReadExternalFile fileReader = ReadFileFactory.getReadExternalFile(FileExternalSourceType.LOCAL_FILE);
         List<String> fileLines = fileReader.readByLines("src/test/resources/in01.txt");
 
@@ -25,11 +30,17 @@ public class DroneTest {
                 .map(MovementTypeUtil::stringToMovementType)
                 .collect(Collectors.toList());
 
-        Drone drone = new Drone("01", deliveryRoutes);
+        Robot drone = new Drone("01", deliveryRoutes);
 
         Thread thread = new Thread(drone);
         thread.start();
+        thread.join();
 
-        System.out.println(drone.getDeliveryPointsReport());
+        List<CartesianPosition> tracking = drone.getTracking();
+
+        assertEquals(3, tracking.size());
+        assertEquals("(-2, 4) O", tracking.get(0).toString());
+        assertEquals("(-1, 3) S", tracking.get(1).toString());
+        assertEquals("(0, 0) O", tracking.get(2).toString());
     }
 }

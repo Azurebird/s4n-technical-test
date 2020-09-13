@@ -1,6 +1,6 @@
-package com.seven4n.util;
+package com.seven4n.robot.util;
 
-import com.seven4n.robot.drone.MovementType;
+import com.seven4n.robot.MovementType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -16,7 +16,7 @@ public class MovementTypeUtilTest {
 
     @Test
     @DisplayName("Should map a string to a movement type list")
-    public void testTransformStringToMovementTypeList(@TempDir Path tempDir) throws IOException{
+    public void testTransformStringToMovementTypeList() throws IOException{
         List<MovementType> movementTypes = MovementTypeUtil.stringToMovementType("AAADIAA");
 
         assertEquals(MovementType.A, movementTypes.get(0));
