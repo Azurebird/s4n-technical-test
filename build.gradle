@@ -1,19 +1,21 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'seven4n'
 version '1.0'
 
 sourceCompatibility = 1.8
+mainClassName = 'com.seven4n.application.Main'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile 'org.javatuples:javatuples:1.2'
-    
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
 
