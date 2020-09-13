@@ -15,8 +15,10 @@ public final class WriteLocalFile implements WriteExternalFile {
 
     private static final Logger logger = LogManager.getLogger(WriteLocalFile.class);
 
-    WriteLocalFile() {
-        // To prevent this class to be instanced out of this package
+    private static WriteLocalFile singleton;
+
+    private WriteLocalFile() {
+        // To prevent this class to be instanced
     }
 
     /**
@@ -35,5 +37,17 @@ public final class WriteLocalFile implements WriteExternalFile {
         printWriter.close();
         logger.debug("Writing file at {} successful", fileDestination);
         return true;
+    }
+
+    /**
+     * Retrieves the only instance of this class
+     * @return An instance of this class
+     */
+    public static WriteLocalFile getInstance() {
+        if (singleton == null) {
+            singleton = new WriteLocalFile();
+            return singleton;
+        }
+        return singleton;
     }
 }

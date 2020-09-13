@@ -15,8 +15,8 @@ public final class WriteFileFactory {
      */
     public static WriteExternalFile getWriteExternalFile(FileExternalSourceType type) {
         if (type == FileExternalSourceType.LOCAL_FILE) {
-            return new WriteLocalFile();
+            return WriteLocalFile.getInstance();
         }
-        return new WriteLocalFile();
+        return WriteLocalFile.getInstance();
     }
 }
