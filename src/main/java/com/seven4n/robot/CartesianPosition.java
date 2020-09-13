@@ -48,12 +48,12 @@ public class CartesianPosition {
      * String representation of this class
      * @return A string in the form of (xCoord, yCoord) Orientation.
      * Ex:
-     * (-1, 2) S
-     * (3, 1) O
-     * (5, -7) E
+     * (-1, 2) dirección Sur
+     * (3, 1) dirección Oeste
+     * (5, -7) dirección Este
      */
     @Override
     public String toString() {
-        return "(" + xCoord +", " + yCoord + ") " + orientation.toString();
+        return "(" + xCoord +", " + yCoord + ") dirección " + orientation.name;
     }
 }
