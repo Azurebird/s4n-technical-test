@@ -33,13 +33,12 @@ public final class WriteLocalFile implements WriteExternalFile {
         ensureParentDirectoryExists(directory.getParentFile());
 
         FileWriter fileWriter = new FileWriter(directory, false);
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-
-        for (String fileLine : fileLines) {
-            printWriter.println(fileLine);
+        try(PrintWriter printWriter = new PrintWriter(fileWriter)){
+            for (String fileLine : fileLines) {
+                printWriter.println(fileLine);
+            }
         }
 
-        printWriter.close();
         logger.debug("Writing file at {} successful", fileDestination);
         return true;
     }
