@@ -32,10 +32,7 @@ public class DroneTest {
 
         Robot drone = new Drone("01", deliveryRoutes);
 
-        Thread thread = new Thread(drone);
-        thread.start();
-        thread.join();
-
+        drone.call();
         List<CartesianPosition> tracking = drone.getTracking();
 
         assertEquals(3, tracking.size());

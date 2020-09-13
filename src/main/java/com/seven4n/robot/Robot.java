@@ -2,11 +2,12 @@ package com.seven4n.robot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * A Robot abstract class representing the different characteristics that may have any delivery robot
  */
-public abstract class Robot implements Runnable {
+public abstract class Robot implements Callable<Void> {
     public final String name;
     protected List<List<MovementType>> routes;
     protected CartesianPosition currentPosition;
@@ -33,8 +34,9 @@ public abstract class Robot implements Runnable {
     }
 
     @Override
-    public void run() {
+    public Void call() {
         doRoutes();
+        return null;
     }
 
     /**
