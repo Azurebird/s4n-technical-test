@@ -24,7 +24,7 @@ public class DroneTest {
     @DisplayName("Should execute the delivery routes successfully with tracking report")
     public void testExecuteDeliveryRoutes() throws IOException, InterruptedException {
         ReadExternalFile fileReader = ReadFileFactory.getReadExternalFile(FileExternalSourceType.LOCAL_FILE);
-        List<String> fileLines = fileReader.readByLines("src/test/resources/in01.txt");
+        List<String> fileLines = fileReader.readByLines("src/test/resources/robots/in01.txt");
 
         List<List<MovementType>> deliveryRoutes = fileLines.stream()
                 .map(MovementTypeUtil::stringToMovementType)
