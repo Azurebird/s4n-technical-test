@@ -4,7 +4,7 @@ feed with a file describing the routes each one should take, once the drones hav
 result file will be left as the result 
 
 # Requirements
-Just one think:
+Just two thinks:
 - Java 8
 - Gradle
 
