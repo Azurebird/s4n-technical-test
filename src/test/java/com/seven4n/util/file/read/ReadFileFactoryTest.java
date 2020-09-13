@@ -22,7 +22,7 @@ public class ReadFileFactoryTest {
     @DisplayName("Should retrieve the file and match its content")
     public void testGetReadExternalFile() throws IOException, URISyntaxException {
         ReadExternalFile fileReader = ReadFileFactory.getReadExternalFile(FileExternalSourceType.LOCAL_FILE);
-        List<String> fileLines = fileReader.readByLines(getResourceFilePath("test_file.txt"));
+        List<String> fileLines = fileReader.readByLines("src/test/resources/test_file.txt");
 
         assertEquals("AAAAIAA N", fileLines.get(0));
         assertEquals("DDDAIAD S", fileLines.get(1));
@@ -34,12 +34,6 @@ public class ReadFileFactoryTest {
     public void testGetReadExternalFileWithException() throws IOException, URISyntaxException {
         ReadExternalFile fileReader = ReadFileFactory.getReadExternalFile(FileExternalSourceType.LOCAL_FILE);
 
-        assertThrows(FileNotFoundException.class, () -> fileReader.readByLines(getResourceFilePath("")));
-    }
-
-    private String getResourceFilePath(String fileName) throws URISyntaxException {
-        URL res = getClass().getClassLoader().getResource(fileName);
-        File file = Paths.get(res.toURI()).toFile();
-        return file.getAbsolutePath();
+        assertThrows(FileNotFoundException.class, () -> fileReader.readByLines(""));
     }
 }
