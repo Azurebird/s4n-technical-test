@@ -25,4 +25,15 @@ public final class MovementTypeUtil {
                 .map(MovementType::valueOf)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Transforms a list of string to a list of list of MovementType by transforming each string with stringToMovementType
+     * @param stringList The string list to transform
+     * @return The new transformed list of list
+     */
+    public static List<List<MovementType>> stringListToMovementTypeList(List<String> stringList) {
+        return stringList.stream()
+                .map(MovementTypeUtil::stringToMovementType)
+                .collect(Collectors.toList());
+    }
 }
