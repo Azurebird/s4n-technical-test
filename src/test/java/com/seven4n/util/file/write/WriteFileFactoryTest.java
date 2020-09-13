@@ -50,4 +50,17 @@ public class WriteFileFactoryTest {
         assertEquals("line 2", fileLines.get(1));
         assertEquals("line 3", fileLines.get(2));
     }
+
+    @Test
+    @DisplayName("Should create the parent directory if it does not exists")
+    public void testCreateParentDirectory(@TempDir Path tempDir) throws IOException{
+        String[] lines = new String[]{"line 1", "line 2", "line 3"};
+        List<String> linesToWrite = Arrays.asList(lines);
+
+        WriteExternalFile externalFileWriter = WriteFileFactory.getWriteExternalFile(FileExternalSourceType.LOCAL_FILE);
+        externalFileWriter.writeFile(tempDir.resolve("/tmp/non_existing_folder").toString(), linesToWrite);
+
+
+        assertTrue(tempDir.resolve("/tmp/non_existing_folder").toFile().exists());
+    }
 }

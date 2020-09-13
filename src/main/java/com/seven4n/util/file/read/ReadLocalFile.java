@@ -41,7 +41,7 @@ public final class ReadLocalFile implements ReadExternalFile {
      * Retrieves the only instance of this class
      * @return An instance of this class
      */
-    public static ReadLocalFile getInstance() {
+    static ReadLocalFile getInstance() {
         if (singleton == null) {
             singleton = new ReadLocalFile();
             return singleton;
