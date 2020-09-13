@@ -2,6 +2,8 @@ package com.seven4n.application;
 
 import com.seven4n.robot.Robot;
 import org.apache.commons.cli.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.concurrent.TimeUnit;
  * Main application class
  */
 public class Main {
+
+    private static final Logger logger = LogManager.getLogger(Main.class);
 
     private static final String DEFAULT_INPUT = "src/main/resources/robots/in";
     private static final String DEFAULT_OUTPUT = "src/main/resources/robots/out";
@@ -46,10 +50,12 @@ public class Main {
      * @param output The output directory to save the robots result
      */
     private static void invokeRobots(String input, String output) throws IOException, InterruptedException {
+        logger.debug("Starting application");
         List<Robot> robots = LoadRobots.loadRobots(input);
         EXECUTOR.invokeAll(robots);
         EXECUTOR.shutdown();
         EXECUTOR.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
         SaveRobotsTracking.saveRobotsTracking(output, robots);
+        logger.debug("Application execution succeeded");
     }
 }

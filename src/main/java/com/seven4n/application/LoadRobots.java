@@ -7,6 +7,8 @@ import com.seven4n.robot.util.MovementTypeUtil;
 import com.seven4n.util.file.FileExternalSourceType;
 import com.seven4n.util.file.read.ReadExternalFile;
 import com.seven4n.util.file.read.ReadFileFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +19,8 @@ import java.util.List;
  * Utility class to load a list of Robots
  */
 public final class LoadRobots {
+
+    private static final Logger logger = LogManager.getLogger(LoadRobots.class);
 
     /**
      * No need to have an instance of this class
@@ -31,21 +35,27 @@ public final class LoadRobots {
      * @return A list of newly created robots
      * @throws IOException In case the files listed in the directory cease to exists during loading.
      */
-    public static List<Robot> loadRobots(String routesPath) throws IOException {
+    public static List<Robot> loadRobots(final String routesPath) throws IOException {
+        logger.debug("Loading robotos!");
+
         List<Robot> robots = new ArrayList<>();
 
         File directory = new File(routesPath);
         File[] filesToRead = directory.listFiles();
 
+        logger.info("Found {} robots", filesToRead.length);
         if (filesToRead != null) {
             ReadExternalFile fileReader = ReadFileFactory.getReadExternalFile(FileExternalSourceType.LOCAL_FILE);
             for (File file: filesToRead) {
                 List<String> fileLines = fileReader.readByLines(file.getAbsolutePath());
                 List<List<MovementType>> deliveryRoutes = MovementTypeUtil.stringListToMovementTypeList(fileLines);
-                robots.add(new Drone(parseRobotName(file.getName()), deliveryRoutes));
+                Robot newRobot = new Drone(parseRobotName(file.getName()), deliveryRoutes);
+                robots.add(newRobot);
+                logger.info("Robot {} added and loaded :D", newRobot.name);
             }
-
         }
+
+        logger.debug("Robot loading finished");
 
         return robots;
     }

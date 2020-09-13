@@ -3,6 +3,8 @@ package com.seven4n.robot.drone;
 
 import com.seven4n.robot.MovementType;
 import com.seven4n.robot.Robot;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
  * A drone with the capabilities of a robot to make routes.
  */
 public class Drone extends Robot {
+
+    private static final Logger logger = LogManager.getLogger(Drone.class);
 
     /**
      * Builds a new drone
@@ -25,6 +29,7 @@ public class Drone extends Robot {
      */
     @Override
     protected void doRoutes() {
+        logger.debug("Here's Drone {} starting route!", name);
         for (List<MovementType> route: routes) {
             for (MovementType movementType: route) {
                 switch (movementType) {
@@ -41,5 +46,6 @@ public class Drone extends Robot {
             }
             tracking.add(currentPosition);
         }
+        logger.debug("Drone {} just finished up delivering", name);
     }
 }
