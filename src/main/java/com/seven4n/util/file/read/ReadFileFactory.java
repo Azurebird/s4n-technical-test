@@ -15,8 +15,8 @@ public final class ReadFileFactory {
      */
     public static ReadExternalFile getReadExternalFile(FileExternalSourceType type) {
         if (type == FileExternalSourceType.LOCAL_FILE) {
-            return new ReadLocalFile();
+            return ReadLocalFile.getInstance();
         }
-        return new ReadLocalFile();
+        return ReadLocalFile.getInstance();
     }
 }

@@ -16,8 +16,10 @@ public final class ReadLocalFile implements ReadExternalFile {
 
     private static final Logger logger = LogManager.getLogger(ReadLocalFile.class);
 
-    ReadLocalFile() {
-        // To prevent this class to be instanced out of this package
+    private static ReadLocalFile singleton;
+
+    private ReadLocalFile() {
+        // To prevent this class to be instanced
     }
 
     /**
@@ -33,5 +35,17 @@ public final class ReadLocalFile implements ReadExternalFile {
         }
         logger.debug("Reading file at {} successful", location);
         return lines;
+    }
+
+    /**
+     * Retrieves the only instance of this class
+     * @return An instance of this class
+     */
+    public static ReadLocalFile getInstance() {
+        if (singleton == null) {
+            singleton = new ReadLocalFile();
+            return singleton;
+        }
+        return singleton;
     }
 }
