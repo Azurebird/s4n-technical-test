@@ -18,7 +18,10 @@ public class MainTest {
     @Test
     @DisplayName("Should load, process the routes and save the result")
     public void testMain(@TempDir Path tempDir) throws IOException, InterruptedException, ParseException {
-        String[] args = new String[] {"-in", "src/test/resources/robots/in", "-out", tempDir.toString()};
+        String[] args = new String[] {
+                "-in", "src/test/resources/robots/in",
+                "-out", tempDir.toString(),
+                "-radius", "10"};
 
         Main.main(args);
 

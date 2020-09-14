@@ -44,7 +44,7 @@ public class Main {
         String output = Optional.ofNullable(cmd.getOptionValue("out")).orElse(DEFAULT_OUTPUT);
         String radius = Optional.ofNullable(cmd.getOptionValue("radius")).orElse(DEFAULT_GRID_SIZE);
 
-        invokeRobots(input, output, Integer.getInteger(radius));
+        invokeRobots(input, output, Integer.valueOf(radius));
     }
 
     /**
@@ -59,6 +59,7 @@ public class Main {
         EXECUTOR.shutdown();
         EXECUTOR.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
         SaveRobotsTracking.saveRobotsTracking(output, robots);
+        robots.forEach(robot -> System.out.println(robot.name + " " + robot.getTracking()));
         logger.debug("Application execution succeeded");
     }
 }
