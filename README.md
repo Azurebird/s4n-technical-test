@@ -26,8 +26,14 @@ Each configuration file name should follow this syntax `in[number].txt`, and its
 using the A for advance, L for a left turn and a R for a right turn.
 
 To execute the program just use `./gradlew run` this will take the default example configuration files found in the 
-`src/main/resources/robot/in` directory and will leave the output result in `src/main/resources/robot/out`, 
-to specify your own input and output directory use `./gradlew run --args="-in {inputDir} -out {outputDir}"`
+`src/main/resources/robot/in` directory and will leave the output result in `src/main/resources/robot/out` with a default
+grid size of 10, to specify your own grid size, input and output directory use:
+
+`./gradlew run --args="-in {inputDir} -out {outputDir} -radius {radius}"`
+
+Example:
+
+`./gradlew run --args="-in /tmp1/in -out /tmp/out -radius 20"`
 
 # Unit Tests
 These can be found at the `src/test` folder. You can also execute the unit testing with `./gradlew test` the results 

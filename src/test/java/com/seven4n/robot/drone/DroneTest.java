@@ -25,11 +25,9 @@ public class DroneTest {
         ReadExternalFile fileReader = ReadFileFactory.getReadExternalFile(FileExternalSourceType.LOCAL_FILE);
         List<String> fileLines = fileReader.readByLines("src/test/resources/robots/in/in01.txt");
 
-        List<List<MovementType>> deliveryRoutes = fileLines.stream()
-                .map(MovementTypeUtil::stringToMovementType)
-                .collect(Collectors.toList());
+        List<List<MovementType>> deliveryRoutes = MovementTypeUtil.stringListToMovementTypeList(fileLines);
 
-        Robot drone = new Drone("01", deliveryRoutes);
+        Robot drone = new Drone("01", deliveryRoutes, 10);
 
         drone.call();
         List<CartesianPosition> tracking = drone.getTracking();
@@ -38,5 +36,22 @@ public class DroneTest {
         assertEquals("(-2, 4) dirección Oeste", tracking.get(0).toString());
         assertEquals("(-1, 3) dirección Sur", tracking.get(1).toString());
         assertEquals("(0, 0) dirección Oeste", tracking.get(2).toString());
+    }
+
+    @Test
+    @DisplayName("Should finish the route before delivering all lunches since radius to short")
+    public void testRadiusToShortToMakeFullRoute() throws IOException, InterruptedException {
+        ReadExternalFile fileReader = ReadFileFactory.getReadExternalFile(FileExternalSourceType.LOCAL_FILE);
+        List<String> fileLines = fileReader.readByLines("src/test/resources/robots/in/in01.txt");
+
+        List<List<MovementType>> deliveryRoutes = MovementTypeUtil.stringListToMovementTypeList(fileLines);
+
+        Robot drone = new Drone("01", deliveryRoutes, 3);
+
+        drone.call();
+        List<CartesianPosition> tracking = drone.getTracking();
+
+        assertEquals(1, tracking.size());
+        assertEquals("(0, 3) dirección Norte", tracking.get(0).toString());
     }
 }

@@ -19,7 +19,7 @@ public class SaveRobotsTrackingTest {
     @Test
     @DisplayName("Should save the robots tracking into the defined folder")
     public void testSaveRobotsTracking(@TempDir Path tempDir) throws IOException {
-        List<Robot> robots = LoadRobots.loadRobots("src/test/resources/robots/in");
+        List<Robot> robots = LoadRobots.loadRobots("src/test/resources/robots/in", 10);
         robots.forEach(Robot::call);
 
         SaveRobotsTracking.saveRobotsTracking(tempDir.toString(), robots);

@@ -15,13 +15,17 @@ public class Drone extends Robot {
 
     private static final Logger logger = LogManager.getLogger(Drone.class);
 
+    private final Integer radius;
+
     /**
      * Builds a new drone
      * @param name The name of the drone
      * @param deliveryRoutes The delivery route for this drone
+     * @param radius The defined radius in which this drone may move
      */
-    public Drone(String name, List<List<MovementType>> deliveryRoutes) {
+    public Drone(String name, List<List<MovementType>> deliveryRoutes, Integer radius) {
         super(name, deliveryRoutes);
+        this.radius = radius;
     }
 
     /**
@@ -30,11 +34,17 @@ public class Drone extends Robot {
     @Override
     protected void doRoutes() {
         logger.debug("Here's Drone {} starting route!", name);
-        for (List<MovementType> route: routes) {
-            for (MovementType movementType: route) {
+        boolean isInRadius = true;
+        for (int i = 0; i < routes.size() && isInRadius; i++) {
+            final List<MovementType> route = routes.get(i);
+
+            for (int j = 0; j < route.size() && isInRadius; j++) {
+                final MovementType movementType = route.get(j);
+
                 switch (movementType) {
                     case A:
                         currentPosition = currentPosition.advance();
+                        isInRadius = isDroneInsideRadius();
                         break;
                     case D:
                         currentPosition = currentPosition.turnRight();
@@ -47,5 +57,13 @@ public class Drone extends Robot {
             tracking.add(currentPosition);
         }
         logger.debug("Drone {} just finished up delivering", name);
+    }
+
+    /**
+     * Evaluates if the drone is still inside the allowed radius
+     * @return true if its still inside radius, false otherwise.
+     */
+    private boolean isDroneInsideRadius() {
+        return Math.abs(currentPosition.xCoord) < radius && Math.abs(currentPosition.yCoord) < radius;
     }
 }

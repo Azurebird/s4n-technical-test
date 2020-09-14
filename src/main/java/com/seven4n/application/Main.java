@@ -21,6 +21,7 @@ public class Main {
 
     private static final String DEFAULT_INPUT = "src/main/resources/robots/in";
     private static final String DEFAULT_OUTPUT = "src/main/resources/robots/out";
+    private static final String DEFAULT_GRID_SIZE = "10";
 
     private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(5);
 
@@ -34,14 +35,16 @@ public class Main {
         Options options = new Options();
         options.addOption("in", true, "Input robots file directory");
         options.addOption("out", true, "Output robots tracking information directory");
+        options.addOption("radius", true, "Output robots tracking information directory");
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
 
         String input = Optional.ofNullable(cmd.getOptionValue("in")).orElse(DEFAULT_INPUT);
         String output = Optional.ofNullable(cmd.getOptionValue("out")).orElse(DEFAULT_OUTPUT);
+        String radius = Optional.ofNullable(cmd.getOptionValue("radius")).orElse(DEFAULT_GRID_SIZE);
 
-        invokeRobots(input, output);
+        invokeRobots(input, output, Integer.getInteger(radius));
     }
 
     /**
@@ -49,9 +52,9 @@ public class Main {
      * @param input The input folder to retrieve the robot configurations
      * @param output The output directory to save the robots result
      */
-    private static void invokeRobots(String input, String output) throws IOException, InterruptedException {
+    private static void invokeRobots(String input, String output, Integer radius) throws IOException, InterruptedException {
         logger.debug("Starting application");
-        List<Robot> robots = LoadRobots.loadRobots(input);
+        List<Robot> robots = LoadRobots.loadRobots(input, radius);
         EXECUTOR.invokeAll(robots);
         EXECUTOR.shutdown();
         EXECUTOR.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);

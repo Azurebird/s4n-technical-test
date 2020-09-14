@@ -32,10 +32,11 @@ public final class LoadRobots {
      * to the number of files in the folder, if the given path is not a directory or it does not contain any files, an
      * empty list of robots will be returned.
      * @param routesPath The path to load the robots.
+     * @param radius
      * @return A list of newly created robots
      * @throws IOException In case the files listed in the directory cease to exists during loading.
      */
-    public static List<Robot> loadRobots(final String routesPath) throws IOException {
+    public static List<Robot> loadRobots(final String routesPath, Integer radius) throws IOException {
         logger.debug("Loading robotos!");
 
         List<Robot> robots = new ArrayList<>();
@@ -43,13 +44,13 @@ public final class LoadRobots {
         File directory = new File(routesPath);
         File[] filesToRead = directory.listFiles();
 
-        logger.info("Found {} robots", filesToRead.length);
         if (filesToRead != null) {
+            logger.info("Found {} robots", filesToRead.length);
             ReadExternalFile fileReader = ReadFileFactory.getReadExternalFile(FileExternalSourceType.LOCAL_FILE);
             for (File file: filesToRead) {
                 List<String> fileLines = fileReader.readByLines(file.getAbsolutePath());
                 List<List<MovementType>> deliveryRoutes = MovementTypeUtil.stringListToMovementTypeList(fileLines);
-                Robot newRobot = new Drone(parseRobotName(file.getName()), deliveryRoutes);
+                Robot newRobot = new Drone(parseRobotName(file.getName()), deliveryRoutes, radius);
                 robots.add(newRobot);
                 logger.info("Robot {} added and loaded :D", newRobot.name);
             }
