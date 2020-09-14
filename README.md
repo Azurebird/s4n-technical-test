@@ -25,6 +25,10 @@ The execution of the program is quite simple, first of all, prepare a folder wit
 Each configuration file name should follow this syntax `in[number].txt`, and its content will describe the drone trajectory
 using the A for advance, L for a left turn and a R for a right turn.
 
+The number of Drones created depends on the number of files, that's why its up to the user to define how many drones will be
+sent, the same goes for the number of lunches delivered, is up to the user define the number of lunches to delivered in each
+file
+
 To execute the program just use `./gradlew run` this will take the default example configuration files found in the 
 `src/main/resources/robot/in` directory and will leave the output result in `src/main/resources/robot/out` with a default
 grid size of 10, to specify your own grid size, input and output directory use:
